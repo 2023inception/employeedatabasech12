@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS employee_tracker;
 CREATE DATABASE employee_tracker;
 USE employee_tracker;
 
-CREATE TABLE department (
+CREATE TABLE departments (
     id INT AUTO_INCREMENT PRIMARY KEY, 
     name VARCHAR(30) 
 );
@@ -16,7 +16,7 @@ CREATE TABLE roles (
     ON DELETE SET NULL
 );
 
-CREATE TABLE employee (
+CREATE TABLE employees (
     id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30),
     last_name VARCHAR(30),
