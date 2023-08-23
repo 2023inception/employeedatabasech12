@@ -38,7 +38,7 @@ inquirer.prompt(questions)
   });
 
   function viewAlldepartments() {
-    connection.query("SELECT * FROM department", (error, rows) => {
+    connection.query("SELECT * FROM departments", (error, rows) => {
       if (error) throw error;
       console.table(rows);
     });
@@ -156,7 +156,7 @@ inquirer.prompt(questions)
           name: 'newRoleID',
         },
       ]).then((data) => {
-        // Update employee's role in the database
+    
         connection.query(
           "UPDATE employee SET role_id = ? WHERE id = ?",
           [data.newRoleID, data.employeeID],

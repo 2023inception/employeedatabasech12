@@ -17,7 +17,7 @@ INSERT INTO roles(title, salary, department_id) VALUES
 ('Fullstack Web Developer', 80000.00, 3),
 ('Senior Software Engineer', 200000, 3),
 ('Digital Marketing Specialist', 1850000.00, 4),
-('Marketing Director', 155000, 4),
+('Marketing Director', 155000, 4);
 
 -- Seed employees 
 INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES
