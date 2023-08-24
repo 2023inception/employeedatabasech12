@@ -14,7 +14,7 @@ const questions = [
     type: 'list',
     message: 'options',
     name: 'selection',
-    choices: ['view all departments', 'view all roles', 'view all employees', 'add a department', 'add a role', 'add an employee', 'update an employee role'],
+    choices: ['view all departments', 'view all roles', 'view all employees', 'add a department', 'add a role', 'add an employee', 'update an employee role','delete department'],
   }
 ];
 
@@ -36,6 +36,8 @@ inquirer.prompt(questions)
       updateAnEmployeeRole();
     }else if (data.selection === 'view department budget') {
       viewDepartmentBudget();
+    }else if (data.selection === 'delete') {
+      deleteDepartment();
     }
   });
 
@@ -139,7 +141,7 @@ inquirer.prompt(questions)
           [data.firstName, data.lastName, data.roleID, data.managerID || null],
           (error, result) => {
             if (error) throw error;
-            console.log(`Employee '${data.firstName} ${data.lastName}' added successfully.`);
+            console.log(`Employees '${data.firstName} ${data.lastName}' added successfully.`);
           }
         );
       });
@@ -189,4 +191,23 @@ function viewDepartmentBudget() {
     );
   });
 }
+
+function deleteDepartment() {
+  inquirer.prompt([
+    {
+      type: 'input',
+      message: 'Enter department ID to delete:',
+      name: 'departmentID',
+    },
+  ]).then((data) => {
+    connection.query(
+      "DELETE FROM departments WHERE id = ?", [data.departmentID],
+      (error,result) => {
+        if (error) throw error;
+        console.log('department deleted')
+      }
+  );
+  });
+}
+
 
