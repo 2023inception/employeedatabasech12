@@ -34,6 +34,8 @@ inquirer.prompt(questions)
       addAnemployee();
     } else if (data.selection === 'update an employee role') {
       updateAnEmployeeRole();
+    }else if (data.selection === 'view department budget') {
+      viewDepartmentBudget();
     }
   });
 
@@ -68,11 +70,11 @@ inquirer.prompt(questions)
       ]).then((data) => {
         // Insert department data into the database
         connection.query(
-          "INSERT INTO department (name) VALUES (?)",
+          "INSERT INTO departments (name) VALUES (?)",
           [data.departmentName],
           (error, result) => {
             if (error) throw error;
-            console.log(`Department '${data.departmentName}' added successfully.`);
+            console.log(`Departments '${data.departmentName}' added successfully.`);
           }
         );
       });
@@ -167,4 +169,24 @@ inquirer.prompt(questions)
         );
       });
     }
-  
+
+function viewDepartmentBudget() {
+  inquirer.prompt([
+    {
+      type: 'input',
+      message: 'Enter department ID:',
+      name: 'departmentID',
+    },
+  ]).then((data) => {
+    // Query the database to calculate the department budget
+    connection.query(
+      "SELECT SUM(salary) AS total_budget FROM roles WHERE department_id = ?",
+      [data.departmentID],
+      (error, result) => {
+        if (error) throw error;
+        console.log(`Total budget for Department ${data.departmentID}: $${result[0].total_budget}`);
+      }
+    );
+  });
+}
+
