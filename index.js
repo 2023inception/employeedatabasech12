@@ -40,7 +40,7 @@ inquirer.prompt(questions)
       deleteDepartment();
     }
   });
-
+//explain
   function viewAlldepartments() {
     connection.query("SELECT * FROM departments", (error, rows) => {
       if (error) throw error;
@@ -137,7 +137,7 @@ inquirer.prompt(questions)
       ]).then((data) => {
         // Insert employee data into the database
         connection.query(
-          "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
+          "INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
           [data.firstName, data.lastName, data.roleID, data.managerID || null],
           (error, result) => {
             if (error) throw error;
@@ -162,7 +162,7 @@ inquirer.prompt(questions)
       ]).then((data) => {
     
         connection.query(
-          "UPDATE employee SET role_id = ? WHERE id = ?",
+          "UPDATE employees SET role_id = ? WHERE id = ?",
           [data.newRoleID, data.employeeID],
           (error, result) => {
             if (error) throw error;
